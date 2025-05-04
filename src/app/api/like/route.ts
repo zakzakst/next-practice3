@@ -21,5 +21,9 @@ export const POST = async (
     return NextResponse.json(PostLikeErrorBodyNotFoundMock, { status: 404 });
   }
 
+  if (params.postId === 999) {
+    // TODO: 不明なエラー実装
+  }
+
   return NextResponse.json(PostLikeResponseMock);
 };

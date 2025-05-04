@@ -1,4 +1,4 @@
-import { ApiErrorBody } from "@/lib/apiError";
+import { ApiError, ApiErrorBody } from "@/lib/apiError";
 
 export type PostLikeRequest = {
   userId: number;
@@ -14,3 +14,14 @@ export type PostLikeErrorCode =
   | "POST_LIKE_NOT_FOUND";
 
 export type PostLikeErrorBody = ApiErrorBody<PostLikeErrorCode>;
+
+export class PostLikeError extends ApiError<PostLikeErrorCode> {
+  constructor({ message, code, status, details }: PostLikeErrorBody) {
+    super({
+      message,
+      code,
+      status,
+      details,
+    });
+  }
+}
