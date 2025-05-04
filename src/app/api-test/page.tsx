@@ -1,6 +1,6 @@
 "use client";
 
-import { postLike, PostLikeRequest } from "@/app/api/like";
+import { postLike, PostLikeRequest, PostLikeError } from "@/app/api/like";
 
 const PostLikeRequestBase: PostLikeRequest = {
   postId: 10,
@@ -14,7 +14,11 @@ const Page = () => {
       console.log(data.id);
     } catch (err) {
       // TODO: エラーの型を利用してtoast表示に反映する
-      console.error(err);
+      if (err instanceof PostLikeError) {
+        console.log(err.code, err.message);
+      } else {
+        console.error(err);
+      }
     }
   };
 
@@ -24,6 +28,7 @@ const Page = () => {
         <button onClick={() => handlePostLike(10)}>Post Like</button>
         <button onClick={() => handlePostLike(401)}>Post Like 401</button>
         <button onClick={() => handlePostLike(404)}>Post Like 404</button>
+        <button onClick={() => handlePostLike(999)}>Post Like 不明</button>
       </div>
     </div>
   );

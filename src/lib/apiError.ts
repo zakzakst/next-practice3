@@ -27,16 +27,17 @@ export class ApiError<
 }
 
 // TODO: 利用先で`new UnknownApiError({})`のような書き方をする必要がある。「{}」を記述しなくてもいいように修正したい
-export class UnknownApiError extends ApiError<"UNKNOWN"> {
-  constructor({
-    status,
-    details,
-  }: Omit<ApiErrorBody<"UNKNOWN">, "message" | "code">) {
-    super({
-      message: "不明なエラーが発生しました",
-      code: "UNKNOWN",
-      status,
-      details,
-    });
-  }
-}
+// NOTE: 作ったはいいが、あまり使いどころなさそう。。メモとしてコメント残しておく
+// export class UnknownApiError extends ApiError<"UNKNOWN"> {
+//   constructor({
+//     status,
+//     details,
+//   }: Omit<ApiErrorBody<"UNKNOWN">, "message" | "code">) {
+//     super({
+//       message: "不明なエラーが発生しました",
+//       code: "UNKNOWN",
+//       status,
+//       details,
+//     });
+//   }
+// }
