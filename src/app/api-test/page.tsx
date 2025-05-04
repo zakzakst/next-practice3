@@ -13,11 +13,13 @@ const Page = () => {
       const data = await postLike({ ...PostLikeRequestBase, postId: num });
       console.log(data.id);
     } catch (err) {
-      // TODO: エラーの型を利用してtoast表示に反映する
       if (err instanceof PostLikeError) {
+        // TODO: エラーの型を利用してtoast表示に反映する
         console.log(err.code, err.message);
       } else {
         console.error(err);
+        // TODO: toast表示に反映する
+        console.log("不明なエラー");
       }
     }
   };
