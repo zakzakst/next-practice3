@@ -28,6 +28,7 @@ export const postLike = async (
     const data: PostLikeResponse = await res.json();
     return data;
   } catch (err) {
+    // TODO: ここでApiError<PostLikeErrorCode>がerrに入ってしまう（PostLikeErrorCode以外だったらUnknownApiErrorを返すようにしたい）
     console.error(err);
     throw new UnknownApiError({});
   }
