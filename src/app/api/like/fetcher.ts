@@ -20,7 +20,7 @@ export const postLike = async (
     body: JSON.stringify(request),
   });
   if (!res.ok) {
-    // TODO: 不明なエラーの挙動がハンドリング出来ているか確認
+    // TODO: 上手くハンドリングできていない。調べて対応する
     const errorData: PostLikeErrorBody = await res.json();
     throw new PostLikeError(errorData);
   }
