@@ -9,9 +9,12 @@ export type PostLikeResponse = {
   id: number;
 };
 
-export type PostLikeErrorCode =
-  | "POST_LIKE_UNAUTHORIZED"
-  | "POST_LIKE_NOT_FOUND";
+export const PostLikeErrorCodes = [
+  "POST_LIKE_UNAUTHORIZED",
+  "POST_LIKE_NOT_FOUND",
+] as const;
+
+export type PostLikeErrorCode = (typeof PostLikeErrorCodes)[number];
 
 export type PostLikeErrorBody = ApiErrorBody<PostLikeErrorCode>;
 

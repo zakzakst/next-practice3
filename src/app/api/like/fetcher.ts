@@ -2,10 +2,12 @@ import { defaultHeaders, host } from "..";
 import {
   PostLikeRequest,
   PostLikeResponse,
+  PostLikeErrorCodes,
   PostLikeErrorBody,
   PostLikeError,
 } from "./type";
 import { PostLikeResponseMock } from "@/mocks/like";
+// import { UnknownApiError } from "@/lib/apiError";
 
 const url = host("/like");
 
@@ -20,9 +22,11 @@ export const postLike = async (
     body: JSON.stringify(request),
   });
   if (!res.ok) {
-    // TODO: 上手くハンドリングできていない。調べて対応する
     const errorData: PostLikeErrorBody = await res.json();
-    throw new PostLikeError(errorData);
+    if (PostLikeErrorCodes.includes(errorData.code)) {
+      throw new PostLikeError(errorData);
+    }
+    // throw new UnknownApiError({});
   }
   const data: PostLikeResponse = await res.json();
   return data;

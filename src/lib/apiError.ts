@@ -5,14 +5,14 @@ export type ApiErrorBody<ErrorCode> = {
   details?: unknown;
 };
 
-export type DefaultApiErrorCode =
-  | "NOT_FOUND"
-  | "UNAUTHORIZED"
-  | "VALIDATION_ERROR"
-  | "UNKNOWN";
+// export type DefaultApiErrorCode =
+//   | "NOT_FOUND"
+//   | "UNAUTHORIZED"
+//   | "VALIDATION_ERROR";
 
 export class ApiError<
-  ErrorCode extends string = DefaultApiErrorCode
+  // ErrorCode extends string = DefaultApiErrorCode
+  ErrorCode extends string = string
 > extends Error {
   code: ErrorCode;
   status?: number;

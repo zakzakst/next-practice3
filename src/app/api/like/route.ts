@@ -5,12 +5,13 @@ import {
   PostLikeUnauthorizedErrorBodyMock,
   PostLikeNotFoundErrorBodyMock,
 } from "@/mocks/like";
-import { UnknownTestErrorBody, UnknownTestErrorBodyMock } from "@/mocks";
+// import { UnknownTestErrorBody, UnknownTestErrorBodyMock } from "@/mocks";
 
 export const POST = async (
   request: NextRequest
 ): Promise<
-  NextResponse<PostLikeResponse | PostLikeErrorBody | UnknownTestErrorBody>
+  // NextResponse<PostLikeResponse | PostLikeErrorBody | UnknownTestErrorBody>
+  NextResponse<PostLikeResponse | PostLikeErrorBody>
 > => {
   const params: PostLikeRequest = await request.json();
 
@@ -24,10 +25,9 @@ export const POST = async (
     return NextResponse.json(PostLikeNotFoundErrorBodyMock, { status: 404 });
   }
 
-  if (params.postId === 999) {
-    // return NextResponse.json(UnknownTestErrorBodyMock, { status: 999 });
-    return NextResponse.json(UnknownTestErrorBodyMock, { status: 503 });
-  }
+  // if (params.postId === 999) {
+  //   return NextResponse.json(UnknownTestErrorBodyMock, { status: 999 });
+  // }
 
   return NextResponse.json(PostLikeResponseMock);
 };
