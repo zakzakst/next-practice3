@@ -2,14 +2,17 @@
 
 import { useForm } from "react-hook-form";
 import { MyTextarea } from "./components/MyTextarea";
+import { MyInput } from "./components/MyInput";
 import { validationMessages } from "@/lib/validationMessages";
 import { Button } from "@/components/ui/button";
 
 type FormValues = {
+  name: string;
   bio: string;
 };
 
 const defaultValues: FormValues = {
+  name: "",
   bio: "",
 };
 
@@ -25,6 +28,14 @@ const Page = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <MyInput
+          name="name"
+          control={control}
+          maxLength={30}
+          rules={{
+            required: validationMessages.required("名前"),
+          }}
+        />
         <MyTextarea
           name="bio"
           control={control}
