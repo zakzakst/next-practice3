@@ -30,7 +30,7 @@ const Page = () => {
         <button onClick={() => handlePostLike(10)}>Post Like</button>
         <button onClick={() => handlePostLike(401)}>Post Like 401</button>
         <button onClick={() => handlePostLike(404)}>Post Like 404</button>
-        <button onClick={() => handlePostLike(999)}>Post Like 不明</button>
+        {/* <button onClick={() => handlePostLike(999)}>Post Like 不明</button> */}
       </div>
     </div>
   );
