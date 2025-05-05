@@ -18,7 +18,7 @@ const Page = () => {
         toast.error(err.message);
       } else {
         console.error(err);
-        // TODO: エラー画面を表示する
+        // TODO: エラー画面を表示する（useErrorBoundary使えるようになる）
         console.log("不明なエラー");
       }
     }
