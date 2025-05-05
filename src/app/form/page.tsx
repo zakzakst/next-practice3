@@ -5,6 +5,7 @@ import { MyTextarea } from "./components/MyTextarea";
 import { MyInput } from "./components/MyInput";
 import { MySelect } from "./components/MySelect";
 import { MyCheckbox } from "./components/MyCheckbox";
+import { MyRadioGroup } from "./components/MyRadioGroup";
 import { validationMessages } from "@/lib/validationMessages";
 import { validationRules } from "@/lib/validationRules";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ type FormValues = {
   bio: string;
   work: string;
   checkbox: boolean;
+  gender: string;
 };
 
 const defaultValues: FormValues = {
@@ -23,6 +25,7 @@ const defaultValues: FormValues = {
   bio: "",
   work: "",
   checkbox: false,
+  gender: "",
 };
 
 const Page = () => {
@@ -103,6 +106,23 @@ const Page = () => {
           control={control}
           rules={{
             required: "確認後チェックしてください",
+          }}
+        />
+        <MyRadioGroup
+          name="gender"
+          control={control}
+          items={[
+            {
+              value: "1",
+              label: "男性",
+            },
+            {
+              value: "2",
+              label: "女性",
+            },
+          ]}
+          rules={{
+            required: validationMessages.required("性別"),
           }}
         />
         <Button variant="outline" type="submit">
