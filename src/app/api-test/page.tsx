@@ -1,6 +1,7 @@
 "use client";
 
 import { postLike, PostLikeRequest, PostLikeError } from "@/app/api/like";
+import { toast } from "sonner";
 
 const PostLikeRequestBase: PostLikeRequest = {
   postId: 10,
@@ -11,14 +12,13 @@ const Page = () => {
   const handlePostLike = async (num: number) => {
     try {
       const data = await postLike({ ...PostLikeRequestBase, postId: num });
-      console.log(data.id);
+      toast.success(`ID:${data.id}の投稿にいいねしました`);
     } catch (err) {
       if (err instanceof PostLikeError) {
-        // TODO: エラーの型を利用してtoast表示に反映する
-        console.log(err.code, err.message);
+        toast.error(err.message);
       } else {
         console.error(err);
-        // TODO: toast表示に反映する
+        // TODO: エラー画面を表示する
         console.log("不明なエラー");
       }
     }
