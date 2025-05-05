@@ -5,6 +5,7 @@ import type { Control, RegisterOptions } from "react-hook-form";
 import { validationMessages } from "@/lib/validationMessages";
 import { useMemo } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import clsx from "clsx";
 
 type Props = {
   name: string;
@@ -36,10 +37,18 @@ export const MyTextarea = ({ name, control, rules, maxLength }: Props) => {
     return field.value?.length || 0;
   }, [field]);
 
+  const isOverMaxLength = useMemo(() => {
+    return currentLength > maxLength;
+  }, [currentLength, maxLength]);
+
   return (
     <div>
-      <Textarea />
-      <div className="text-right text-sm">
+      <Textarea id={name} {...field} />
+      <div
+        className={clsx("text-right text-sm", {
+          "text-red-500": isOverMaxLength,
+        })}
+      >
         {currentLength} / {maxLength} 文字
       </div>
       {error && <p className="text-sm text-red-500">{error.message}</p>}
