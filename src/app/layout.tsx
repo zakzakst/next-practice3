@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import "@/styles/globals.css";
+import styles from "@/styles/layout.module.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster className={styles.toaster} />
+      </body>
     </html>
   );
 }
+// data-type="loading" li
