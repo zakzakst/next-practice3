@@ -5,6 +5,8 @@ import { MyTextarea } from "./components/MyTextarea";
 import { MyInput } from "./components/MyInput";
 import { MySelect } from "./components/MySelect";
 import { MyCheckbox } from "./components/MyCheckbox";
+import { MyRadioGroup } from "./components/MyRadioGroup";
+import { MyDatePicker } from "./components/MyDatePicker";
 import { validationMessages } from "@/lib/validationMessages";
 import { validationRules } from "@/lib/validationRules";
 import { Button } from "@/components/ui/button";
@@ -15,6 +17,8 @@ type FormValues = {
   bio: string;
   work: string;
   checkbox: boolean;
+  gender: string;
+  date: Date | null;
 };
 
 const defaultValues: FormValues = {
@@ -23,6 +27,8 @@ const defaultValues: FormValues = {
   bio: "",
   work: "",
   checkbox: false,
+  gender: "",
+  date: null,
 };
 
 const Page = () => {
@@ -104,6 +110,34 @@ const Page = () => {
           rules={{
             required: "確認後チェックしてください",
           }}
+        />
+        <MyRadioGroup
+          name="gender"
+          control={control}
+          items={[
+            {
+              value: "1",
+              label: "男性",
+            },
+            {
+              value: "2",
+              label: "女性",
+            },
+          ]}
+          rules={{
+            required: validationMessages.required("性別"),
+          }}
+        />
+        <MyDatePicker
+          name="date"
+          control={control}
+          rules={{
+            required: validationMessages.required("日付"),
+          }}
+          placeholder="誕生日を選択してください"
+          calendarDisabled={(date) =>
+            date > new Date() || date < new Date("2025-04-01")
+          }
         />
         <Button variant="outline" type="submit">
           送信
