@@ -1,25 +1,33 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { MyTextarea } from "./components/MyTextarea";
 import { MyInput } from "./components/MyInput";
+import { MySelect } from "./components/MySelectbox";
 import { validationMessages } from "@/lib/validationMessages";
+import { validationRules } from "@/lib/validationRules";
 import { Button } from "@/components/ui/button";
 
 type FormValues = {
   name: string;
+  name2: string;
   bio: string;
+  work: string;
 };
 
 const defaultValues: FormValues = {
   name: "",
+  name2: "",
   bio: "",
+  work: "",
 };
 
 const Page = () => {
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues,
   });
+
+  const nameValue = useWatch({ control, name: "name" });
 
   const onSubmit = (data: FormValues) => {
     console.log("送信データ:", data);
@@ -34,6 +42,19 @@ const Page = () => {
           maxLength={30}
           rules={{
             required: validationMessages.required("名前"),
+            validate: {
+              noWhitespaceOnly: validationRules.noWhitespaceOnly,
+            },
+          }}
+        />
+        <MyInput
+          name="name2"
+          control={control}
+          maxLength={30}
+          rules={{
+            validate: {
+              matches: validationRules.matches(nameValue, "名前が一致しません"),
+            },
           }}
         />
         <MyTextarea
@@ -43,6 +64,31 @@ const Page = () => {
           rules={{
             required: validationMessages.required("自己紹介"),
           }}
+        />
+        <MySelect
+          name="work"
+          control={control}
+          rules={{
+            required: validationMessages.required("職種"),
+            validate: {
+              disableValue: (v: string) =>
+                ["1", "2"].includes(v) || "不適切な値が選択されています",
+            },
+          }}
+          options={[
+            {
+              value: "1",
+              label: "work1",
+            },
+            {
+              value: "2",
+              label: "work2",
+            },
+            {
+              value: "3",
+              label: "work3",
+            },
+          ]}
         />
         <Button variant="outline" type="submit">
           送信
