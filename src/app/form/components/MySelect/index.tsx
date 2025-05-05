@@ -42,10 +42,7 @@ export const MySelect = ({
 
   return (
     <div>
-      <Select
-        onValueChange={(value) => field.onChange(value)}
-        value={field.value}
-      >
+      <Select onValueChange={field.onChange} value={field.value}>
         <SelectTrigger>
           <SelectValue placeholder={placeholder || "項目を選択してください"} />
         </SelectTrigger>

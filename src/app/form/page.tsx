@@ -3,7 +3,8 @@
 import { useForm, useWatch } from "react-hook-form";
 import { MyTextarea } from "./components/MyTextarea";
 import { MyInput } from "./components/MyInput";
-import { MySelect } from "./components/MySelectbox";
+import { MySelect } from "./components/MySelect";
+import { MyCheckbox } from "./components/MyCheckbox";
 import { validationMessages } from "@/lib/validationMessages";
 import { validationRules } from "@/lib/validationRules";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,7 @@ type FormValues = {
   name2: string;
   bio: string;
   work: string;
+  checkbox: boolean;
 };
 
 const defaultValues: FormValues = {
@@ -20,6 +22,7 @@ const defaultValues: FormValues = {
   name2: "",
   bio: "",
   work: "",
+  checkbox: false,
 };
 
 const Page = () => {
@@ -89,6 +92,18 @@ const Page = () => {
               label: "work3",
             },
           ]}
+        />
+        <MyCheckbox
+          label={
+            <>
+              <a href="#">利用規約</a>に同意します
+            </>
+          }
+          name="checkbox"
+          control={control}
+          rules={{
+            required: "確認後チェックしてください",
+          }}
         />
         <Button variant="outline" type="submit">
           送信
