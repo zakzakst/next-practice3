@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import useSWR from "swr";
 import { host } from "@/app/api";
-import { GetSWRResponse } from "@/app/api/swr/type";
+import { GetSWRParams, GetSWRResponse } from "@/app/api/swr/type";
 
 // const url = host("/swr?page=1");
 // const url = host("/swr");
@@ -11,6 +11,7 @@ import { GetSWRResponse } from "@/app/api/swr/type";
 const fetcher = async (url: string) => {
   try {
     const res = await fetch(url);
+    // TODO: エラーハンドリングしっかりやる
     if (!res.ok) {
       throw new Error("error");
     }
@@ -21,14 +22,24 @@ const fetcher = async (url: string) => {
   }
 };
 
+const defaultParams: GetSWRParams = {
+  page: 1,
+  category: 1,
+};
+
 export const useSwrApi = () => {
   const [shouldFetch, setShouldFetch] = useState(false);
-  const [page, setPage] = useState(1);
+  const [params, setParams] = useState<GetSWRParams>(defaultParams);
 
   const url = useMemo(() => {
-    // TODO: パラメータを渡しやすい形にする
-    return host(`/swr?page=${page}`);
-  }, [page]);
+    const query = new URLSearchParams(
+      Object.entries(params).reduce((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {} as Record<string, string>)
+    );
+    return host(`/swr?${query.toString()}`);
+  }, [params]);
 
   const { data, error, isLoading } = useSWR<GetSWRResponse>(
     shouldFetch ? url : null,
@@ -44,7 +55,7 @@ export const useSwrApi = () => {
     data,
     error,
     isLoading,
-    page,
-    setPage,
+    params,
+    setParams,
   };
 };

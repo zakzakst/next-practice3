@@ -32,8 +32,15 @@ export const Sample = () => {
   //     revalidateOnFocus: false,
   //   }
   // );
-  const { shouldFetch, setShouldFetch, data, error, isLoading, page, setPage } =
-    useSwrApi();
+  const {
+    shouldFetch,
+    setShouldFetch,
+    data,
+    error,
+    isLoading,
+    params,
+    setParams,
+  } = useSwrApi();
 
   if (error)
     return (
@@ -50,15 +57,31 @@ export const Sample = () => {
       <div>
         <Button onClick={() => setShouldFetch(true)}>fetch</Button>
       </div>
-      <div>現在のページ: {page}</div>
+      <div>現在のページ: {params.page}</div>
+      <div>現在のカテゴリー: {params.category}</div>
       {shouldFetch && (
         <div className="flex gap-1">
-          <Button onClick={() => setPage((current) => ++current)}>+</Button>
           <Button
-            onClick={() => setPage((current) => --current)}
-            disabled={page < 2}
+            onClick={() =>
+              setParams((current) => ({ ...current, page: current.page + 1 }))
+            }
+          >
+            +
+          </Button>
+          <Button
+            onClick={() =>
+              setParams((current) => ({ ...current, page: current.page - 1 }))
+            }
+            disabled={params.page < 2}
           >
             -
+          </Button>
+          <Button
+            onClick={() =>
+              setParams((current) => ({ ...current, category: 2 }))
+            }
+          >
+            カテゴリー2
           </Button>
         </div>
       )}
