@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";
 import styles from "@/styles/layout.module.css";
+import { MSWProvider } from "./msw-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,10 +17,11 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        {children}
-        <Toaster className={styles.toaster} />
+        <MSWProvider>
+          {children}
+          <Toaster className={styles.toaster} />
+        </MSWProvider>
       </body>
     </html>
   );
 }
-// data-type="loading" li
