@@ -1,6 +1,7 @@
 ### やること
 
-- useErrorBoundary を使ったエラー表示
+- SWR を利用
+- SWR 的な hook を作ってみる
 
 ### やること（済）
 
