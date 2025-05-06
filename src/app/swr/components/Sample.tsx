@@ -1,32 +1,67 @@
 "use client";
 
-import { useState } from "react";
-import useSWR from "swr";
-import { host } from "@/app/api";
+// import { useState } from "react";
+// import useSWR from "swr";
+// import { host } from "@/app/api";
 import { Button } from "@/components/ui/button";
-import { GetSWRResponse } from "@/app/api/swr/type";
+// import { GetSWRResponse } from "@/app/api/swr/type";
+import { useSwrApi } from "./useSwrApi";
 
-const url = host("/swr");
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// const url = host("/swr");
+// // const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// const fetcher = async (url: string) => {
+//   try {
+//     const res = await fetch(url);
+//     if (!res.ok) {
+//       throw new Error("error");
+//     }
+//     const data = await res.json();
+//     return data;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
 
 export const Sample = () => {
-  const [shouldFetch, setShouldFetch] = useState(false);
+  // const [shouldFetch, setShouldFetch] = useState(false);
 
-  const { data, error, isLoading } = useSWR<GetSWRResponse>(
-    shouldFetch ? url : null,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-    }
-  );
+  // const { data, error, isLoading } = useSWR<GetSWRResponse>(
+  //   shouldFetch ? url : null,
+  //   fetcher,
+  //   {
+  //     revalidateOnFocus: false,
+  //   }
+  // );
+  const { shouldFetch, setShouldFetch, data, error, isLoading, page, setPage } =
+    useSwrApi();
 
-  if (error) return <div>failed to load</div>;
+  if (error)
+    return (
+      <div>
+        <p>failed to load</p>
+        <p>{JSON.stringify(error)}</p>
+      </div>
+    );
   if (isLoading) return <div>loading...</div>;
 
   return (
     <div>
       {data && <div>{data.name}</div>}
-      <Button onClick={() => setShouldFetch(true)}>fetch</Button>
+      <div>
+        <Button onClick={() => setShouldFetch(true)}>fetch</Button>
+      </div>
+      <div>現在のページ: {page}</div>
+      {shouldFetch && (
+        <div className="flex gap-1">
+          <Button onClick={() => setPage((current) => ++current)}>+</Button>
+          <Button
+            onClick={() => setPage((current) => --current)}
+            disabled={page < 2}
+          >
+            -
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
