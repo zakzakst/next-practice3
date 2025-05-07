@@ -3,22 +3,35 @@
 import { useState, useMemo } from "react";
 import useSWR from "swr";
 import { host } from "@/app/api";
-import { GetSWRParams, GetSWRResponse } from "@/app/api/swr/type";
+import {
+  GetSWRParams,
+  GetSWRResponse,
+  SwrErrorCodes,
+  // SwrErrorBody,
+  SwrError,
+  PostSWRRequest,
+  PostSWRResponse,
+} from "@/app/api/swr/type";
+import { UnknownApiError } from "@/lib/apiError";
 
 // const url = host("/swr?page=1");
 // const url = host("/swr");
 
-const fetcher = async (url: string) => {
+const getFetcher = async (url: string) => {
   try {
     const res = await fetch(url);
-    // TODO: エラーハンドリングしっかりやる
     if (!res.ok) {
-      throw new Error("error");
+      const errorData = await res.json();
+      if (SwrErrorCodes.includes(errorData.code)) {
+        throw new SwrError(errorData);
+      }
+      throw new UnknownApiError({});
     }
     const data = await res.json();
     return data;
   } catch (err) {
-    throw err;
+    console.error(err);
+    throw new UnknownApiError({});
   }
 };
 
@@ -43,9 +56,12 @@ export const useSwrApi = () => {
 
   const { data, error, isLoading } = useSWR<GetSWRResponse>(
     shouldFetch ? url : null,
-    fetcher,
+    getFetcher,
     {
+      // revalidateIfStale: false,
       revalidateOnFocus: false,
+      // revalidateOnReconnect: false,
+      shouldRetryOnError: false,
     }
   );
 
@@ -57,5 +73,46 @@ export const useSwrApi = () => {
     isLoading,
     params,
     setParams,
+  };
+};
+
+const postFetcher = async (url: string, request: PostSWRRequest) => {
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(request),
+    });
+    if (!res.ok) {
+      throw new UnknownApiError({});
+    }
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw new UnknownApiError({});
+  }
+};
+
+export const usePostSwrApi = () => {
+  const [shouldFetch, setShouldFetch] = useState(false);
+  const [request, setRequest] = useState<PostSWRRequest>({ id: "2" });
+
+  const { data, error, isLoading } = useSWR<PostSWRResponse>(
+    shouldFetch ? host("/swr") : null,
+    postFetcher,
+    {
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    }
+  );
+
+  return {
+    shouldFetch,
+    setShouldFetch,
+    data,
+    error,
+    isLoading,
+    request,
+    setRequest,
   };
 };
