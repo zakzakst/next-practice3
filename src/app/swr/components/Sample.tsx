@@ -46,7 +46,8 @@ export const Sample = () => {
     return (
       <div>
         <p>failed to load</p>
-        <p>{JSON.stringify(error)}</p>
+        <p>{JSON.stringify(error.message)}</p>
+        <p>{error.message}</p>
       </div>
     );
   if (isLoading) return <div>loading...</div>;
