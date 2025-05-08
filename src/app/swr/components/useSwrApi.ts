@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from "react";
 import useSWR from "swr";
-import { host } from "@/app/api";
+import { defaultHeaders, host } from "@/app/api";
+import useSWRMutation from "swr/mutation";
 import {
   GetSWRParams,
   GetSWRResponse,
@@ -76,10 +77,16 @@ export const useSwrApi = () => {
   };
 };
 
-const postFetcher = async (url: string, request: PostSWRRequest) => {
+// TODO: 多分requestの渡し方が間違っている。triggerを使う必要あり？
+// https://zenn.dev/dev_commune/articles/55a4ad785e233e#検証内容
+const postFetcher = async (
+  url: string,
+  { request }: { request: PostSWRRequest }
+) => {
   try {
     const res = await fetch(url, {
       method: "POST",
+      headers: defaultHeaders,
       body: JSON.stringify(request),
     });
     if (!res.ok) {
@@ -114,5 +121,47 @@ export const usePostSwrApi = () => {
     isLoading,
     request,
     setRequest,
+  };
+};
+
+export const updateUser = async (
+  url: string,
+  { arg }: { arg: PostSWRRequest }
+): Promise<PostSWRResponse> => {
+  // await fetch(url, {
+  //   method: "POST",
+  //   body: JSON.stringify(arg),
+  //   // headers: {
+  //   //   Authorization: `Bearer ${arg}`
+  //   // }
+  // });
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      // headers: defaultHeaders,
+      body: JSON.stringify(arg),
+    });
+    if (!res.ok) {
+      throw new UnknownApiError({});
+    }
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw new UnknownApiError({});
+  }
+};
+
+export const usePostSwrApi2 = () => {
+  const { data, trigger, error, isMutating } = useSWRMutation<PostSWRResponse>(
+    host("/swr"),
+    updateUser
+  );
+
+  return {
+    data,
+    trigger,
+    error,
+    isMutating,
   };
 };
