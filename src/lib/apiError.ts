@@ -28,6 +28,7 @@ export class ApiError<
 
 // TODO: 利用先で`new UnknownApiError({})`のような書き方をする必要がある。「{}」を記述しなくてもいいように修正したい
 // NOTE: 作ったはいいが、あまり使いどころなさそう。。メモとしてコメント残しておく
+// ⇒修正できた。使いどころも思いついた
 export class UnknownApiError extends ApiError<"UNKNOWN"> {
   constructor({
     status,
