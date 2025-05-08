@@ -35,8 +35,7 @@ export const GET = async (
 export const POST = async (
   request: Request
 ): Promise<NextResponse<PostSWRResponse>> => {
-  // NOTE: 上手くいかない。下記が原因？一旦保留してmswで試す
-  // https://qiita.com/kojish2018/items/b0b2e9080aab57f5bc28
+  // NOTE: 上手くいかない。多分「postFetcher」の書き方が間違っているのが原因。直ったら試す
   // const body: PostSWRRequest = await request.json();
   // const { id } = body;
   // console.log(id);

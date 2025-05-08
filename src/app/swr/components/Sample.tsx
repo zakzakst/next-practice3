@@ -5,7 +5,7 @@
 // import { host } from "@/app/api";
 import { Button } from "@/components/ui/button";
 // import { GetSWRResponse } from "@/app/api/swr/type";
-import { useSwrApi } from "./useSwrApi";
+import { usePostSwrApi2 } from "./useSwrApi";
 
 // const url = host("/swr");
 // // const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -32,15 +32,18 @@ export const Sample = () => {
   //     revalidateOnFocus: false,
   //   }
   // );
-  const {
-    shouldFetch,
-    setShouldFetch,
-    data,
-    error,
-    isLoading,
-    params,
-    setParams,
-  } = useSwrApi();
+
+  // const {
+  //   shouldFetch,
+  //   setShouldFetch,
+  //   data,
+  //   error,
+  //   isLoading,
+  //   params,
+  //   setParams,
+  // } = useSwrApi();
+
+  const { data, trigger, error, isMutating } = usePostSwrApi2();
 
   if (error)
     return (
@@ -50,15 +53,17 @@ export const Sample = () => {
         <p>{error.message}</p>
       </div>
     );
-  if (isLoading) return <div>loading...</div>;
+  // if (isLoading) return <div>loading...</div>;
+  if (isMutating) return <div>loading...</div>;
 
   return (
     <div>
-      {data && <div>{data.name}</div>}
+      {data && <div>{data.id}</div>}
       <div>
-        <Button onClick={() => setShouldFetch(true)}>fetch</Button>
+        {/* <Button onClick={() => setShouldFetch(true)}>fetch</Button> */}
+        <Button onClick={() => trigger()}>trigger</Button>
       </div>
-      <div>現在のページ: {params.page}</div>
+      {/* <div>現在のページ: {params.page}</div>
       <div>現在のカテゴリー: {params.category}</div>
       {shouldFetch && (
         <div className="flex gap-1">
@@ -85,7 +90,7 @@ export const Sample = () => {
             カテゴリー2
           </Button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
