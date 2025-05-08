@@ -33,6 +33,7 @@ const sendRequest = async (
     // headers: defaultHeaders,
     body: JSON.stringify(arg),
   });
+  // apiのuseにはtry catch書かない
   if (!res.ok) {
     // エラーコードの分岐処理がある場合この前に記載
     throw new Error("res not ok");
@@ -63,6 +64,7 @@ export default function Page() {
       onClick={async () => {
         try {
           trigger({ id: "johndoe" });
+          // NOTE: データ保持する必要ない場合はresult受け取ってそれを変更に反映するほうが安全かも
           // const result = await trigger({ id: "johndoe" } /* options */);
           // console.log(result);
         } catch (e) {
