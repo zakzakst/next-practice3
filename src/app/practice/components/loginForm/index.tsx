@@ -52,13 +52,13 @@ export const LoginForm = ({ onSubmit }: Props) => {
           name="password"
           label="パスワード"
           control={control}
-          type="password"
+          // type="password"
         />
         <InputWithError
           name="passwordConfirm"
           label="確認用パスワード"
           control={control}
-          type="password"
+          // type="password"
         />
       </div>
       <div className="mt-4">

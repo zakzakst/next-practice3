@@ -9,7 +9,7 @@ const Page = () => {
     if (isMutating) return;
     const { email, password } = data;
     const result = await trigger({ email, password });
-    console.log(result.id);
+    alert(`ID:${result.id}のユーザーでログイン`);
   };
 
   return (
