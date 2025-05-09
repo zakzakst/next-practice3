@@ -11,11 +11,12 @@ export type TodoItem = {
 };
 
 type Props = {
-  items: TodoItem[];
+  items?: TodoItem[];
   onUpdateDone: (id: string, state: boolean) => void;
   onEditText: (id: string, text: string) => void;
 };
 
+// TODO: 初期状態の表示どうするか考える
 export const TodoList = ({ items, onUpdateDone, onEditText }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -24,7 +25,8 @@ export const TodoList = ({ items, onUpdateDone, onEditText }: Props) => {
     setIsEditing(false);
   };
 
-  if (!items.length) return <div>登録されているタスクがありません</div>;
+  if (items === undefined) return null;
+  if (!items?.length) return <div>登録されているタスクがありません</div>;
 
   return (
     <ul>
