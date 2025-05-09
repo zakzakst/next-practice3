@@ -7,7 +7,7 @@ import {
 } from "./type";
 import { defaultHeaders, host, ApiError, UnknownApiError } from "..";
 
-const postLoginFetch = async (
+const postLoginFetcher = async (
   url: string,
   { arg }: { arg: PostLoginRequest }
 ): Promise<PostLoginResponse> => {
@@ -30,7 +30,7 @@ const postLoginFetch = async (
 export const usePostLogin = () => {
   const { trigger, error, isMutating } = useSWRMutation(
     host("/login"),
-    postLoginFetch
+    postLoginFetcher
   );
   return {
     trigger,
