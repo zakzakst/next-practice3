@@ -4,6 +4,7 @@ import { ApiErrorBody } from "@/lib/apiError";
 export type GetTodoParams = {
   doneState?: boolean;
   keyword?: string;
+  page?: number;
 };
 
 export type GetTodoResponse = {
