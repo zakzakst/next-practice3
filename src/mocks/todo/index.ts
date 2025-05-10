@@ -5,18 +5,18 @@ import {
 import { ApiErrorBody } from "@/app/practice/api";
 
 export const GetTodoResponseMock: GetTodoResponse = {
-  items: [
+  todos: [
     {
       id: "1",
       text: "タスク1",
-      done: false,
+      state: "done",
       createdAt: new Date("2024/1/1"),
       updatedAt: new Date("2024/1/4"),
     },
     {
       id: "2",
       text: "タスク2",
-      done: false,
+      state: "wip",
       createdAt: new Date("2024/1/1"),
       updatedAt: null,
     },

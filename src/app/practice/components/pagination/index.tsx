@@ -14,16 +14,19 @@ type Props = {
   current: number;
   length: number;
   onMove: (page: number) => void;
+  className?: string;
 };
 
-export const Pagination = ({ current, length, onMove }: Props) => {
+export const Pagination = ({ current, length, onMove, className }: Props) => {
   const handleOnMove = (page: number, isCurrent: boolean = false) => {
     if (isCurrent || page < 1 || page > length) return;
     onMove(page);
   };
 
+  if (!length) return null;
+
   return (
-    <UiPagination>
+    <UiPagination className={className}>
       <PaginationContent>
         <PaginationItem>
           <Button
