@@ -25,7 +25,7 @@ const getTodoFetcher = async (url: string) => {
   return data;
 };
 
-const getTodoDefaultParams: GetTodoParams = {};
+export const getTodoDefaultParams: GetTodoParams = {};
 const getTodoInitData: GetTodoResponse = { items: [] };
 
 export const useGetTodo = () => {
