@@ -76,10 +76,8 @@ export const TodoListItem = ({
           <div className="pt-1">{todo.text}</div>
         )}
         <div className="mt-1 text-sm text-gray-500">
-          作成日：{todo.createdAt.toLocaleDateString()}
-          {todo.updatedAt && (
-            <>（{todo.updatedAt.toLocaleDateString()} 編集済）</>
-          )}
+          作成日：{todo.createdAt.toLocaleString()}
+          {todo.updatedAt && <>（{todo.updatedAt.toLocaleString()} 編集済）</>}
         </div>
       </div>
       <div className="flex gap-2">

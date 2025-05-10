@@ -1,4 +1,5 @@
-import { TodoItem } from "@/app/practice/components/todoList";
+// import { TodoItem } from "@/app/practice/components/todoList";
+import { Todo } from "@/types/todo";
 import { ApiErrorBody } from "@/lib/apiError";
 
 export type GetTodoParams = {
@@ -8,7 +9,8 @@ export type GetTodoParams = {
 };
 
 export type GetTodoResponse = {
-  items: TodoItem[];
+  // items: TodoItem[];
+  todos: Todo[];
 };
 
 export const GetTodoErrorCodes = ["GET_TODO_NOT_FOUND"] as const;
