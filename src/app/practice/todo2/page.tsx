@@ -10,6 +10,7 @@ import {
   TodoListFilterParams,
   StateItems,
 } from "../components/todoListFilter";
+import ReactMarkdown from "react-markdown";
 
 const Page = () => {
   const [todos, setTodos] = useState<Todo[] | null>(null);
@@ -17,6 +18,7 @@ const Page = () => {
     selectedState: StateItems[0].value,
   });
   const { trigger, error, isMutating, params, setParams } = useGetTodo2();
+  const [markdown, setMarkdown] = useState<string>("");
 
   const updateTodos = useCallback(async () => {
     const res = await trigger();
@@ -67,6 +69,17 @@ const Page = () => {
         onMove={movePage}
         className="mt-4"
       />
+      <div>
+        <h2>Markdown 入力</h2>
+        <textarea
+          placeholder="マークダウンを入力してください"
+          value={markdown}
+          onChange={(e) => setMarkdown(e.target.value)}
+        />
+
+        <h2>プレビュー</h2>
+        <ReactMarkdown>{markdown}</ReactMarkdown>
+      </div>
     </div>
   );
 };
