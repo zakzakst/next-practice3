@@ -1,7 +1,8 @@
 "use client";
 
 import { TodoList } from "../components/todoList";
-import { TodoListItem } from "../components/todoListItem";
+import { TodoList2 } from "../components/todoList2";
+// import { TodoListItem } from "../components/todoListItem";
 import { useGetTodo } from "../api/todo/swr";
 import { useState, useEffect } from "react";
 import { Pagination } from "../components/pagination";
@@ -31,7 +32,28 @@ const Page = () => {
         onEditText={(id, text) => console.log(id, text)}
       />
       <Pagination current={current} length={10} onMove={onMove} />
-      <TodoListItem
+      <TodoList2
+        todos={[
+          {
+            id: "1",
+            text: "タスク文言1",
+            state: "done",
+            createdAt: new Date("2025/1/1"),
+            updatedAt: new Date("2025/1/1"),
+          },
+          {
+            id: "2",
+            text: "タスク文言2",
+            state: "wip",
+            createdAt: new Date("2025/1/1"),
+            updatedAt: null,
+          },
+        ]}
+        onEdit={(id, text) => console.log(id, text)}
+        onDelete={(id) => console.log(id, "削除")}
+        onChangeDoneState={(id, state) => console.log(id, state)}
+      />
+      {/* <TodoListItem
         todo={{
           id: "1",
           text: "タスク文言",
@@ -42,7 +64,7 @@ const Page = () => {
         onEdit={(text) => console.log(text)}
         onDelete={() => console.log("削除")}
         onChangeDoneState={(state) => console.log(state)}
-      />
+      /> */}
     </div>
   );
 };

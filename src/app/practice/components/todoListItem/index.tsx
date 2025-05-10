@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import clsx from "clsx";
@@ -9,9 +9,9 @@ import { Todo, TodoDoneState } from "@/types/todo";
 
 type Props = {
   todo: Todo;
-  onEdit: (text: string) => void;
-  onDelete: () => void;
-  onChangeDoneState: (state: TodoDoneState) => void;
+  onEdit: (id: string, text: string) => void;
+  onDelete: (todo: Todo) => void;
+  onChangeDoneState: (id: string, state: TodoDoneState) => void;
 };
 
 export const TodoListItem = ({
@@ -22,21 +22,28 @@ export const TodoListItem = ({
 }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingText, setEditingText] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleChangeDoneState = () => {
+    const changedState = todo.state === "done" ? "wip" : "done";
+    onChangeDoneState(todo.id, changedState);
+  };
 
   const handleIsEditing = () => {
     setIsEditing(!isEditing);
     if (!isEditing) {
       setEditingText(todo.text);
-      // TODO: フォーカスのかけ方調べる（レンダリングが完了してからの処理）
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 500);
+    }
+  };
+
+  // NOTE: ref callbackを利用し、編集状態にした時にフォーカスさせる
+  const inputRef = (node: HTMLInputElement | null) => {
+    if (node) {
+      node.focus();
     }
   };
 
   const handleEdit = () => {
-    onEdit(editingText);
+    onEdit(todo.id, editingText);
     setIsEditing(false);
   };
 
@@ -50,7 +57,7 @@ export const TodoListItem = ({
             "text-green-600": todo.state === "done",
             "text-gray-300": todo.state !== "done",
           })}
-          onClick={() => onChangeDoneState(todo.state)}
+          onClick={() => handleChangeDoneState()}
           aria-label={todo.state === "done" ? "未完了にする" : "完了にする"}
         >
           <Check />
@@ -90,6 +97,7 @@ export const TodoListItem = ({
             size="icon"
             aria-label="編集内容を反映する"
             onClick={() => handleEdit()}
+            disabled={todo.text === editingText}
           >
             <CornerDownLeft />
           </Button>
@@ -98,7 +106,7 @@ export const TodoListItem = ({
             variant="outline"
             size="icon"
             aria-label="削除する"
-            onClick={() => onDelete()}
+            onClick={() => onDelete(todo)}
           >
             <Trash2 />
           </Button>
