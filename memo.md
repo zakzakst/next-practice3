@@ -1,5 +1,6 @@
 ### やること
 
+- form onSubmit 以外で react hook form の handleSubmit 使う
 - jest で fetch を mock 化
   https://widen.tokyo/jest-fetch-mock-test/
 - SWR を利用
