@@ -3,6 +3,8 @@
 - form onSubmit 以外で react hook form の handleSubmit 使う
 - jest で fetch を mock 化
   https://widen.tokyo/jest-fetch-mock-test/
+  - エラー時など異常系の表示検証もやりたい
+  - react hook form の挙動チェックを jest で行う
 - SWR を利用
   - GET の時に axios 使った方がシンプルに書ける？
   - use 〇〇の関数をそれぞれの場面に合わせてカスタマイズ
@@ -25,3 +27,8 @@
     ⇒TODO リスト作る
     - form 以外にも、ページネーションや絞り込みやる、あとマークダウンでの入力もやりたい
     - ログインフォームも
+
+### エラー時に参考にした
+
+- `The current testing environment is not configured to support act(...)`
+  https://airry.hatenablog.com/entry/globalthis_is_react_act_environment-not_working/

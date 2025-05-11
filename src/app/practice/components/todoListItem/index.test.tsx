@@ -13,8 +13,8 @@ const setup = () => {
     id: "1",
     text: "TODO1",
     state: "wip",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date("2025/1/1"),
+    updatedAt: new Date("2025/1/1"),
   };
   render(
     <TodoListItem
@@ -71,6 +71,7 @@ test("完了状態の切替が発火する", async () => {
   });
   await user.click(changeDoneStateButtonEl);
   expect(onChangeDoneStateFn).toHaveBeenCalledTimes(1);
+  expect(onChangeDoneStateFn).toHaveBeenCalledWith("1", "done");
 });
 
 test("アイテム削除が発火する", async () => {
@@ -80,6 +81,13 @@ test("アイテム削除が発火する", async () => {
   });
   await user.click(deleteButtonEl);
   expect(onDeleteFn).toHaveBeenCalledTimes(1);
+  expect(onDeleteFn).toHaveBeenCalledWith({
+    id: "1",
+    text: "TODO1",
+    state: "wip",
+    createdAt: new Date("2025/1/1"),
+    updatedAt: new Date("2025/1/1"),
+  });
 });
 
 test("編集状態反映が発火する", async () => {
@@ -91,6 +99,9 @@ test("編集状態反映が発火する", async () => {
     expect(editInputEl).toBeInTheDocument();
     expect(editInputEl.value).toBe("TODO1");
     expect(screen.getByDisplayValue("TODO1")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "編集内容を反映する" })
+    ).toBeDisabled();
     await user.clear(editInputEl);
     await user.type(editInputEl, "FIX TODO");
     act(() => {
@@ -100,6 +111,7 @@ test("編集状態反映が発火する", async () => {
   const editButtonEl = screen.getByRole("button", {
     name: "編集内容を反映する",
   });
+  expect(editButtonEl).not.toBeDisabled();
   await user.click(editButtonEl);
   expect(onEditFn).toHaveBeenCalledTimes(1);
   expect(onEditFn).toHaveBeenCalledWith("1", "FIX TODO");
