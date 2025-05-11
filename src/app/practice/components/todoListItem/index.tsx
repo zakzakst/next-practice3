@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import clsx from "clsx";
@@ -36,11 +36,11 @@ export const TodoListItem = ({
   };
 
   // NOTE: ref callbackを利用し、編集状態にした時にフォーカスさせる
-  const inputRef = (node: HTMLInputElement | null) => {
+  const inputRefCallback = useCallback((node: HTMLInputElement | null) => {
     if (node) {
       node.focus();
     }
-  };
+  }, []);
 
   const handleEdit = () => {
     onEdit(todo.id, editingText);
@@ -69,7 +69,7 @@ export const TodoListItem = ({
             <Input
               value={editingText}
               onChange={(e) => setEditingText(e.target.value)}
-              ref={inputRef}
+              ref={inputRefCallback}
             />
           </div>
         ) : (
