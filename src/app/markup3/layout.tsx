@@ -3,7 +3,7 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-  return <div className="mx-auto max-w-2xl w-full">{children}</div>;
+  return <div className="mx-auto max-w-sm w-full">{children}</div>;
 };
 
 export default Layout;
