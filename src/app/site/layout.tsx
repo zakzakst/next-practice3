@@ -10,7 +10,7 @@ const Layout = ({ children }: Props) => {
     <>
       <div className="min-h-screen flex flex-col relative">
         <Header className="sticky top-0" />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow place-content-center">{children}</main>
         <Footer className="sticky bottom-0" />
       </div>
     </>
