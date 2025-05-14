@@ -11,6 +11,10 @@ export const ImageUpload2 = () => {
     if (!files.length) return;
 
     [...files].forEach((file) => {
+      console.log(file.name, file.size, file.type);
+      if (file.size > 30000) return;
+      if (file.type !== "image/png") return;
+
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result;
