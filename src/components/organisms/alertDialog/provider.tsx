@@ -18,7 +18,6 @@ export const AlertDialogProvider = ({ children, defaultState }: Props) => {
 
   const showAlertDialog = useCallback(
     (props?: Partial<Omit<AlertDialogState, "isOpen">>) => {
-      console.log("test");
       setState((prev) => ({ ...prev, ...props, isOpen: true }));
     },
     []
