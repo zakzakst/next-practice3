@@ -6,6 +6,7 @@ const PostListItem = () => {
   return (
     <Link href="#" className="block border">
       <div className="aspect-2/1">
+        {/* eslint-disable-next-line */}
         <img
           src="https://picsum.photos/id/237/200/200"
           alt=""

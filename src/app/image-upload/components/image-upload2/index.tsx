@@ -48,6 +48,7 @@ export const ImageUpload2 = () => {
         className={clsx("w-96 h-96 bg-gray-200", { "bg-red-200": state.over })}
       >
         {images[0] ? (
+          // eslint-disable-next-line
           <img src={images[0]} alt="" className="w-full h-full object-cover" />
         ) : (
           "Drop something here."
@@ -57,6 +58,7 @@ export const ImageUpload2 = () => {
       <div>
         {images.map((image, index) => (
           <div key={index}>
+            {/* eslint-disable-next-line */}
             <img src={image} alt="" onClick={() => handleDeleteImage(index)} />
           </div>
         ))}

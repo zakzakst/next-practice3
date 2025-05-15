@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+// eslint-disable-next-line
 import { GetSWRResponse, PostSWRRequest, PostSWRResponse } from "./type";
 
 const sleep = (ms: number): Promise<void> => {
@@ -33,6 +34,7 @@ export const GET = async (
 };
 
 export const POST = async (
+  // eslint-disable-next-line
   request: Request
 ): Promise<NextResponse<PostSWRResponse>> => {
   // NOTE: 上手くいかない。多分「postFetcher」の書き方が間違っているのが原因。直ったら試す

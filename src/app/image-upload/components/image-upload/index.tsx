@@ -45,6 +45,7 @@ export const ImageUpload = () => {
       <div>
         {images.map((image, index) => (
           <div key={index}>
+            {/* eslint-disable-next-line */}
             <img src={image} alt="" onClick={() => handleDeleteImage(index)} />
           </div>
         ))}

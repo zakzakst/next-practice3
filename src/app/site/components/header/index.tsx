@@ -40,6 +40,7 @@ export const Header = ({ className, ...rest }: Props) => {
         <Popover>
           <PopoverTrigger>
             <span className="inline-block w-8 h-8 rounded-full overflow-hidden">
+              {/* eslint-disable-next-line */}
               <img
                 src="https://picsum.photos/id/237/200/200"
                 alt=""
