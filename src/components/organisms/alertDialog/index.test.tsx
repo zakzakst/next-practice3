@@ -1,5 +1,5 @@
 import { AlertDialogProvider } from "./provider";
-import { AlertDialog } from "@/components/ui/alert-dialog";
+import { AlertDialog } from "@/components/organisms/alertDialog";
 import { render, screen } from "@testing-library/react";
 
 const TestComponent = () => {
@@ -13,6 +13,6 @@ const TestComponent = () => {
 // TODO: テストコード上手くできない。対応方法調べる
 test("メッセージが反映される", () => {
   render(<TestComponent />);
-  screen.debug();
-  // expect(screen.getByRole("alertdialog")).toBeInTheDocument();
+  // screen.debug();
+  expect(screen.getByRole("alertdialog")).toBeInTheDocument();
 });

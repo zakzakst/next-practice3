@@ -10,6 +10,7 @@ const Page = async ({ params }: Props) => {
   return (
     <div className="p-4 mx-auto max-w-3xl">
       <div className="aspect-3/1">
+        {/* eslint-disable-next-line */}
         <img
           src="https://picsum.photos/id/237/900/300"
           alt=""

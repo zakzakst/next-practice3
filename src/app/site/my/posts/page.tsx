@@ -18,6 +18,7 @@ const Page = () => {
       <div className="grid grid-cols-[1fr_4fr] gap-6">
         <div>
           <div className="aspect-square rounded-full overflow-hidden">
+            {/* eslint-disable-next-line */}
             <img
               src="https://picsum.photos/id/237/200/200"
               alt=""

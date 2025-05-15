@@ -1,5 +1,9 @@
 ### やること
 
+- 下記みたいのあるの覚えておく
+  https://www.npmjs.com/package/@testing-library/react-hooks
+- 下記試す
+  https://zenn.dev/takky94/articles/4daa73dd516bf3
 - form onSubmit 以外で react hook form の handleSubmit 使う
 - jest で fetch を mock 化
   https://widen.tokyo/jest-fetch-mock-test/

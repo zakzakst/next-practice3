@@ -11,6 +11,7 @@ type Props = {
   };
 };
 
+// eslint-disable-next-line
 const Page = async ({ params }: Props) => {
   // const { id } = await params;
 
@@ -36,6 +37,7 @@ const Page = async ({ params }: Props) => {
         <div className="grid place-content-center w-48">
           {/* <Button>イメージを選択する</Button> */}
           <div className="aspect-3/2 overflow-hidden">
+            {/* eslint-disable-next-line */}
             <img
               src="https://picsum.photos/id/237/200/200"
               alt=""
