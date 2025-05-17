@@ -1,5 +1,7 @@
 ### やること
 
+- next-session 使ってみる
+  https://github.com/frontend-testing-book/nextjs/blob/main/src/lib/next-session/index.ts
 - 下記みたいのあるの覚えておく
   https://www.npmjs.com/package/@testing-library/react-hooks
 - 下記試す
