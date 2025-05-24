@@ -11,6 +11,11 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useMemo } from "react";
 
+type Item = {
+  type: "number" | "ellipsis";
+  value: number | null;
+};
+
 export const Pagination = () => {
   const limit = 5;
   const total = 46;
@@ -24,8 +29,33 @@ export const Pagination = () => {
   //     label: index + 1,
   //   }));
   // console.log(items);
-  const items: number[] = useMemo(() => {
-    return [page - 1, page, page + 1];
+  // const items: number[] = useMemo(() => {
+  //   return [page - 1, page, page + 1];
+  // }, []);
+
+  const items: Item[] = useMemo(() => {
+    return [
+      {
+        type: "ellipsis",
+        value: null,
+      },
+      {
+        type: "number",
+        value: page - 1,
+      },
+      {
+        type: "number",
+        value: page,
+      },
+      {
+        type: "number",
+        value: page + 1,
+      },
+      {
+        type: "ellipsis",
+        value: null,
+      },
+    ];
   }, []);
 
   const isPrevItemActive = page !== 1;
@@ -39,9 +69,18 @@ export const Pagination = () => {
             <ChevronLeftIcon />
           </Button>
         </PaginationItem>
-        <PaginationItem>
+        {items.map((item, index) => (
+          <PaginationItem
+            key={index}
+            aria-current={page === item.value ? "page" : undefined}
+          >
+            {item.type === "ellipsis" && <PaginationEllipsis />}
+            {item.type === "number" && <Button>{item.value}</Button>}
+          </PaginationItem>
+        ))}
+        {/* <PaginationItem>
           <PaginationEllipsis />
-        </PaginationItem>
+        </PaginationItem> */}
         {/* {Array(itemLength)
           .fill(null)
           .map((_, index) => (
@@ -52,17 +91,17 @@ export const Pagination = () => {
               <Button>{index + 1}</Button>
             </PaginationItem>
           ))} */}
-        {items.map((item) => (
+        {/* {items.map((item) => (
           <PaginationItem
             key={item}
             aria-current={page === item ? "page" : undefined}
           >
             <Button>{item}</Button>
           </PaginationItem>
-        ))}
-        <PaginationItem>
+        ))} */}
+        {/* <PaginationItem>
           <PaginationEllipsis />
-        </PaginationItem>
+        </PaginationItem> */}
         <PaginationItem>
           <Button size="icon" aria-label="次" disabled={!isNextItemActive}>
             <ChevronRightIcon />
