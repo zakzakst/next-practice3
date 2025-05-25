@@ -36,6 +36,10 @@ export const Pagination = () => {
   const items: Item[] = useMemo(() => {
     return [
       {
+        type: "number",
+        value: 1,
+      },
+      {
         type: "ellipsis",
         value: null,
       },
@@ -55,8 +59,12 @@ export const Pagination = () => {
         type: "ellipsis",
         value: null,
       },
+      {
+        type: "number",
+        value: itemLength,
+      },
     ];
-  }, []);
+  }, [itemLength]);
 
   const isPrevItemActive = page !== 1;
   const isNextItemActive = page !== itemLength;
