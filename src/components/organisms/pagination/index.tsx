@@ -13,13 +13,22 @@ type Item = {
   value: number | null;
 };
 
-type Props = {
+type OwnProps = {
   limit: number;
   total: number;
   current: number;
+  className?: string;
 };
 
-export const Pagination = ({ limit, total, current }: Props) => {
+type Props = Omit<React.ComponentProps<"nav">, keyof OwnProps> & OwnProps;
+
+export const Pagination = ({
+  limit,
+  total,
+  current,
+  className,
+  ...rest
+}: Props) => {
   const max = Math.ceil(total / limit);
 
   const items: Item[] = useMemo(() => {
@@ -57,8 +66,10 @@ export const Pagination = ({ limit, total, current }: Props) => {
     return result;
   }, [current, max]);
 
+  if (total === 0) return null;
+
   return (
-    <ShadcnPagination>
+    <ShadcnPagination className={className} {...rest}>
       <PaginationContent>
         <PaginationItem>
           <Button size="icon" aria-label="前" disabled={current === 1}>
