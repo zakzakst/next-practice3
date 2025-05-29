@@ -15,3 +15,10 @@ test("現在ページが最後の場合、次ボタンが無効になる", () =>
   render(<Pagination limit={5} total={51} current={11} />);
   expect(screen.getByRole("button", { name: "次" })).toBeDisabled();
 });
+
+test("クラス名が設定される", () => {
+  render(
+    <Pagination limit={5} total={51} current={11} className="custom-class" />
+  );
+  expect(screen.getByRole("navigation")).toHaveClass("custom-class");
+});
