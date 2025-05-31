@@ -15,7 +15,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/User"
+            $ref: "../../schemas/user.yaml"
           examples:
             Get User Alice Smith:
               value:
@@ -74,7 +74,7 @@ patch:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/User"
+            $ref: "../../schemas/user.yaml"
           examples:
             Updated User Rebecca Baker:
               value:
