@@ -1,0 +1,12 @@
+openapi: 3.1.0
+info:
+  version: "1.0"
+  title: swagger-api
+  summary: APIの一覧
+paths:
+  /like:
+    $ref: "./paths/like/index.yaml"
+  /login:
+    $ref: "./paths/login/index.yaml"
+  /post/{postId}:
+    $ref: "./paths/post/post-id.yaml"
