@@ -1,0 +1,23 @@
+# https://qiita.com/yuya_sega/items/0b87e8e7d494f6fa3d69
+openapi: '3.0.0'
+info:
+  title: test-api
+  version: v1
+paths:
+  /tests: # ここがpath（URLの一部になります）
+    get:  # ここがリクエストメソッド
+      summary: テストAPI # API名
+      parameters: # リクエストパラメータ
+      - name: test
+        in: query
+        schema:
+          type: string
+      responses: # リクエストレスポンス
+        200:
+          description: success operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
