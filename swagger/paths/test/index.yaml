@@ -12,7 +12,7 @@ get:
               id:
                 type: string
               task:
-                $ref: "#/components/schemas/Task"
+                $ref: "../../schemas/task.yaml"
           examples:
             Example 1:
               value: {}

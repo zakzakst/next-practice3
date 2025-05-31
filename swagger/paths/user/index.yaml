@@ -36,7 +36,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/User"
+            $ref: "../../schemas/user.yaml"
           examples:
             New User Bob Fellow:
               value:
