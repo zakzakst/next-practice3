@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:apidoc": "redoc-cli bundle swagger/api.yaml --output api.html"
+    "build:apidoc": "redoc-cli bundle swagger-api/api.yaml --output api.html"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

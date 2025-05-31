@@ -1,0 +1,58 @@
+get:
+  summary: 記事詳細情報取得
+  description: 記事の詳細情報を取得する
+  parameters:
+    - name: postId
+      in: path
+      description: 取得したい記事のID
+      required: true
+      type: integer
+  responses:
+    "200":
+      description: 取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: 記事ID
+                type: integer
+              title:
+                description: タイトル
+                type: string
+              description:
+                description: 記事概要
+                type: string
+              body:
+                description: 記事本文
+                type: string
+              imageUrl:
+                description: メイン画像のURL
+                type: string
+              published:
+                description: 公開フラグ
+                type: boolean
+              authorId:
+                description: 投稿者ユーザーID
+                type: integer
+              likeCount:
+                description: いいねの数
+                type: integer
+              liked:
+                description: 閲覧ユーザーのいいねの有無
+                type: boolean
+          examples:
+            "記事詳細情報取得に成功":
+              value:
+                id: 1
+                title: サイトをリニューアルしました
+                description: 1/1に新しいサイトを公開しました
+                body: より目的の記事が見つかりやすいデザインになりました
+                imageUrl: https://www.sample.com/path/to/image
+                published: true
+                authorId: 1
+                likeCount: 13
+                liked: false
+    "404":
+      description: 該当記事が見つからない

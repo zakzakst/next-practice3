@@ -1,0 +1,54 @@
+post:
+  summary: ログイン
+  description: ログインしてレスポンスでユーザー情報を返す
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            email:
+              description: メールアドレス
+              type: string
+              format: email
+            password:
+              description: パスワード
+              type: string
+          required:
+            - email
+            - password
+        examples:
+          "ログイン":
+            value:
+              userId: sample@mail.com
+              postId: password
+  responses:
+    "200":
+      description: ログイン成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: ユーザーID
+                type: integer
+              name:
+                description: ユーザー名
+                type: string
+              email:
+                description: メールアドレス
+                type: string
+                format: email
+              imageUrl:
+                description: サムネイル画像のURL
+                type: string
+          examples:
+            "ログイン成功":
+              value:
+                id: 1
+                name: 山田太郎
+                email: sample@mail.com
+                imageUrl: https://www.sample.com/path/to/thumbnail
+    "404":
+      description: 該当ユーザーが見つからない

@@ -1,0 +1,40 @@
+post:
+  summary: いいね
+  description: 記事にいいねする
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            userId:
+              description: いいねを送るユーザーのID
+              type: integer
+            postId:
+              description: いいねされる記事のID
+              type: integer
+          required:
+            - userId
+            - postId
+        examples:
+          "ID1のユーザーがID2の記事へいいねを送る":
+            value:
+              userId: 1
+              postId: 2
+  responses:
+    "200":
+      description: いいね成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                description: いいねされた記事のID
+                type: integer
+          examples:
+            "ID1の記事へのいいねが成功":
+              value:
+                id: 1
+    "503":
+      description: すでにいいね済み
