@@ -1,0 +1,20 @@
+get:
+  summary: Your GET endpoint
+  operationId: get-test
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              task:
+                $ref: "#/components/schemas/Task"
+          examples:
+            Example 1:
+              value: {}
+  servers:
+    - url: "http://localhost:3000"

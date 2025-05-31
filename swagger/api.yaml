@@ -1,12 +1,20 @@
-# https://qiita.com/yuya_sega/items/0b87e8e7d494f6fa3d69
-# https://qiita.com/non_watanabe/items/f33983f3a6b4251d9a90
-# https://zenn.dev/dozo/articles/1e0f542ea59244
-openapi: '3.0.0'
+openapi: 3.1.0
 info:
+  version: "1.0"
   title: test-api
-  version: v1
+  summary: テスト用に作成したAPIです
+servers:
+  - url: "http://localhost:3000"
 paths:
-  /tests:
-    $ref: 'paths/test.yaml'
-  /tests2:
-    $ref: 'paths/test2.yaml'
+  "/users/{userId}":
+    $ref: "paths/users/user-id.yaml"
+  /user:
+    $ref: "paths/user/index.yaml"
+  /test:
+    $ref: "paths/test/index.yaml"
+components:
+  schemas:
+    User:
+      $ref: "schemas/user.yaml"
+    Task:
+      $ref: "schemas/task.yaml"

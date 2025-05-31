@@ -1,0 +1,9 @@
+type: object
+title: Task
+properties:
+  id:
+    type: string
+  description:
+    type: string
+  start_at:
+    type: string
