@@ -1,0 +1,93 @@
+get:
+  summary: Get User Info by User ID
+  description: Retrieve the information of the user with the matching user ID.
+  operationId: get-users-userId
+  parameters:
+    - name: userId
+      in: path
+      description: Id of an existing user.
+      required: true
+      schema:
+        type: integer
+  responses:
+    "200":
+      description: User Found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+          examples:
+            Get User Alice Smith:
+              value:
+                id: 142
+                firstName: Alice
+                lastName: Smith
+                email: alice.smith@gmail.com
+                dateOfBirth: "1997-10-31"
+                emailVerified: true
+                signUpDate: "2019-08-24"
+    "404":
+      description: User Not Found
+  servers:
+    - url: "http://localhost:3000"
+patch:
+  summary: Update User Information
+  description: Update the information of an existing user.
+  operationId: patch-users-userId
+  parameters:
+    - name: userId
+      in: path
+      description: Id of an existing user.
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    description: Patch user properties to update.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            firstName:
+              type: string
+            lastName:
+              type: string
+            email:
+              type: string
+              description: "If a new email is given, the user's email verified property will be set to false."
+            dateOfBirth:
+              type: string
+        examples:
+          Update First Name:
+            value:
+              firstName: Rebecca
+          Update Email:
+            value:
+              email: rebecca@gmail.com
+          Update Last Name & Date of Birth:
+            value:
+              lastName: Baker
+              dateOfBirth: "1985-10-02"
+  responses:
+    "200":
+      description: User Updated
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+          examples:
+            Updated User Rebecca Baker:
+              value:
+                id: 13
+                firstName: Rebecca
+                lastName: Baker
+                email: rebecca@gmail.com
+                dateOfBirth: "1985-10-02"
+                emailVerified: false
+                createDate: "2019-08-24"
+    "404":
+      description: User Not Found
+    "409":
+      description: Email Already Taken
+  servers:
+    - url: "http://localhost:3000"
