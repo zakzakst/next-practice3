@@ -1,0 +1,16 @@
+get:  # ここがリクエストメソッド
+  summary: テスト分割API2 # API名
+  parameters: # リクエストパラメータ
+  - name: test
+    in: query
+    schema:
+      type: string
+  responses: # リクエストレスポンス
+    200:
+      description: success operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: string
