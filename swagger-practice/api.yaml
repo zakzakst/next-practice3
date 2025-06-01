@@ -12,6 +12,9 @@ servers:
   - url: https://production.com/api
     description: 本番環境
 
+security:
+  - BearerAuth: []
+
 paths:
   /posts:
     get:
@@ -278,3 +281,8 @@ components:
       schema:
         type: string
         enum: [asc, desc]
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
