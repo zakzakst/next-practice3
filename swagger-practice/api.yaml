@@ -17,6 +17,28 @@ paths:
     get:
       summary: ブログ記事一覧を取得
       operationId: getPosts
+      parameters:
+        - name: limit
+          in: query
+          description: "取得する記事の最大数"
+          required: false
+          schema:
+            type: integer
+          example: 10
+        - name: offset
+          in: query
+          description: "開始位置（20を指定すると21件目から取得）"
+          required: false
+          schema:
+            type: integer
+          example: 20
+        - name: q
+          in: query
+          description: "タイトルや本文に含まれるキーワードで検索"
+          required: false
+          schema:
+            type: string
+          example: 旅行
       responses:
         "200":
           description: 記事一覧の取得に成功
@@ -49,6 +71,9 @@ paths:
                 body:
                   description: 記事本文
                   type: string
+              required:
+                - title
+                - body
             examples:
               "新規記事作成":
                 value:
@@ -121,3 +146,86 @@ paths:
                     title: サイトをリニューアルしました
                     body: より目的の記事が見つかりやすいデザインになりました
                     createdAt: 2024-06-01T12:34:56Z
+    put:
+      summary: ブログ記事の更新
+      operationId: updatePostById
+      parameters:
+        - name: id
+          in: path
+          description: 更新したい記事のID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  description: 記事タイトル
+                  type: string
+                body:
+                  description: 記事本文
+                  type: string
+              required: []
+            examples:
+              "タイトルのみ更新":
+                value:
+                  title: 更新したタイトル
+              "本文のみ更新":
+                value:
+                  body: 更新した本文
+      responses:
+        "200":
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: 記事ID
+                    type: integer
+                  title:
+                    description: タイトル
+                    type: string
+                  body:
+                    description: 記事本文
+                    type: string
+                  createdAt:
+                    description: 作成日時
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    description: 更新日時
+                    type: string
+                    format: date-time
+              examples:
+                "タイトルの更新に成功":
+                  value:
+                    id: 1
+                    title: 更新したタイトル
+                    body: より目的の記事が見つかりやすいデザインになりました
+                    createdAt: 2024-06-01T12:34:56Z
+                    updatedAt: 2024-06-07T12:34:56Z
+                "本文の更新に成功":
+                  value:
+                    id: 1
+                    title: サイトをリニューアルしました
+                    body: 更新した本文
+                    createdAt: 2024-06-01T12:34:56Z
+                    updatedAt: 2024-06-07T12:34:56Z
+    delete:
+      summary: ブログ記事の削除
+      operationId: deletePostById
+      parameters:
+        - name: id
+          in: path
+          description: 削除したい記事のID
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: 削除成功（レスポンスボディなし）
