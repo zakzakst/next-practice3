@@ -17,6 +17,28 @@ paths:
     get:
       summary: ブログ記事一覧を取得
       operationId: getPosts
+      parameters:
+        - name: limit
+          in: query
+          description: "取得する記事の最大数"
+          required: false
+          schema:
+            type: integer
+          example: 10
+        - name: offset
+          in: query
+          description: "開始位置（20を指定すると21件目から取得）"
+          required: false
+          schema:
+            type: integer
+          example: 20
+        - name: q
+          in: query
+          description: "タイトルや本文に含まれるキーワードで検索"
+          required: false
+          schema:
+            type: string
+          example: 旅行
       responses:
         "200":
           description: 記事一覧の取得に成功
