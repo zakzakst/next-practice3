@@ -5,6 +5,6 @@
     }
   ],
   "settings": {
-    "github.copilot.enable": { "*": false, "typescript": false }
+    "github.copilot.enable": { "*": false, "typescript": false, "yaml": false }
   }
 }

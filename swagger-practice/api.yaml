@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  title: MY BLOG BFF API
+  version: 1.0.0
+  description: ブログ投稿サイト「MY BLOG」のBFF API定義です
+
+servers:
+  - url: http://localhost:3000/api
+    description: ローカル開発環境
+  - url: https://develop.com/api
+    description: 検証環境
+  - url: https://production.com/api
+    description: 本番環境
+
+paths:
+  /posts:
+    get:
+      summary: ブログ記事一覧を取得
+      operationId: getPosts
+      responses:
+        "200":
+          description: 記事一覧の取得に成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    createdAt:
+                      type: string
+                      format: date-time
+    post:
+      summary: ブログ記事を新規作成
+      operationId: createPost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  description: 記事タイトル
+                  type: string
+                body:
+                  description: 記事本文
+                  type: string
+            examples:
+              "新規記事作成":
+                value:
+                  title: 北海道に行ってきました
+                  body: 美味しいものをいっぱい食べれて満足でした
+      responses:
+        "201":
+          description: 新規作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: 記事ID
+                    type: integer
+                  title:
+                    description: 記事タイトル
+                    type: string
+                  body:
+                    description: 記事本文
+                    type: string
+                  createdAt:
+                    description: 作成日時
+                    type: string
+                    format: date-time
+              examples:
+                "新規作成に成功":
+                  value:
+                    id: 1
+                    title: 北海道に行ってきました
+                    body: 美味しいものをいっぱい食べれて満足でした
+                    createdAt: 2024-06-01T12:34:56Z
+  /posts/{id}:
+    get:
+      summary: ブログ記事詳細を取得
+      operationId: getPostById
+      parameters:
+        - name: id
+          in: path
+          description: 取得したい記事のID
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: 取得成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: 記事ID
+                    type: integer
+                  title:
+                    description: タイトル
+                    type: string
+                  body:
+                    description: 記事本文
+                    type: string
+                  createdAt:
+                    description: 作成日時
+                    type: string
+                    format: date-time
+              examples:
+                "記事詳細情報取得に成功":
+                  value:
+                    id: 1
+                    title: サイトをリニューアルしました
+                    body: より目的の記事が見つかりやすいデザインになりました
+                    createdAt: 2024-06-01T12:34:56Z
