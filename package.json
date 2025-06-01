@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:apidoc": "redoc-cli bundle swagger-api/api.yaml --output api.html"
+    "build:swagger:api": "redoc-cli bundle swagger-api/api.yaml --output dist/api.html",
+    "build:swagger:practice": "redoc-cli bundle swagger-practice/api.yaml --output dist/api.html",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -58,6 +60,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "gh-pages": "^6.3.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "msw": "^2.7.6",
