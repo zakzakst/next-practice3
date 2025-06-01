@@ -18,6 +18,7 @@ paths:
       summary: ブログ記事一覧を取得
       operationId: getPosts
       parameters:
+        - $ref: "#/components/parameters/SortOrder"
         - name: limit
           in: query
           description: "取得する記事の最大数"
@@ -268,3 +269,12 @@ components:
             message: 認証が必要です
             errors:
               code: UNAUTHORIZED
+  parameters:
+    SortOrder:
+      name: sort
+      in: query
+      description: "並び順（asc: 昇順、desc: 降順）"
+      required: false
+      schema:
+        type: string
+        enum: [asc, desc]
