@@ -1,0 +1,27 @@
+get:
+  summary: 記事一覧情報取得
+  description: 記事一覧の情報を取得する
+  parameters:
+    - name: page
+      in: query
+      description: ページ番号
+      required: false
+      type: integer
+    - name: orderBy
+      in: query
+      description: 表示順
+      required: false
+      type: string
+      enum: [updatedAt, starCount]
+  responses:
+    "200":
+      description: 取得成功
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              pagination:
+                current: integer
+                prev: number
+                next: number
