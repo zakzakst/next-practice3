@@ -107,6 +107,10 @@ paths:
                     title: 北海道に行ってきました
                     body: 美味しいものをいっぱい食べれて満足でした
                     createdAt: 2024-06-01T12:34:56Z
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
   /posts/{id}:
     get:
       summary: ブログ記事詳細を取得
@@ -229,3 +233,38 @@ paths:
       responses:
         "204":
           description: 削除成功（レスポンスボディなし）
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: エラーの概要を伝えるメッセージ
+        errors:
+          type: object
+          description: エラーの詳細な情報
+          additionalProperties:
+            type: string
+  responses:
+    ValidationError:
+      description: バリデーションエラー
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            message: 送信されたデータが正しくありません
+            errors:
+              title: タイトルは必須です
+              body: 本文は500文字以内で入力してください
+    UnauthorizedError:
+      description: 認証エラー
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            message: 認証が必要です
+            errors:
+              code: UNAUTHORIZED
