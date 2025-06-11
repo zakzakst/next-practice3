@@ -9,5 +9,5 @@ export const ThreeSample = () => {
     if (!ref.current) return;
   }, []);
 
-  return <div ref={ref} />;
+  return <div ref={ref} style={{ width: "100%", height: "100vh" }} />;
 };
