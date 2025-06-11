@@ -1,4 +1,4 @@
-import { ThreeSample } from "./components/sample";
+import { ThreeSample } from "./components/1";
 
 const Page = () => {
   return <ThreeSample />;
