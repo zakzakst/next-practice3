@@ -4,27 +4,36 @@ import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "myText";
 
+const getFromLocalStorage = (key: string): string | null => {
+  if (typeof window === "undefined") return null;
+  try {
+    return window.localStorage.getItem(key);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const saveToLocalStorage = (key: string, value: string) => {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(key, value);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const Page = () => {
   const [text, setText] = useState("");
   const [stored, setStored] = useState<string | null>(null);
 
-  const isStorageAvailable = (): boolean => {
-    try {
-      return typeof window !== "undefined" && "localStorage" in window;
-    } catch {
-      return false;
-    }
-  };
-
   useEffect(() => {
-    if (!isStorageAvailable()) return;
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = getFromLocalStorage(STORAGE_KEY);
     setStored(saved);
   }, []);
 
   const handleSave = () => {
-    if (!isStorageAvailable()) return;
-    localStorage.setItem(STORAGE_KEY, text);
+    saveToLocalStorage(STORAGE_KEY, text);
     setStored(text);
     setText("");
   };
