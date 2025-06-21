@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "firsttris.vscode-jest-runner",
+    "bradlc.vscode-tailwindcss",
+    "ritwickdey.liveserver",
+    "editorconfig.editorconfig",
+    "alefragnani.bookmarks",
+    "ms-ceintl.vscode-language-pack-ja",
+    "yzane.markdown-pdf",
+    "wayou.vscode-todo-highlight",
+    "fabiospampinato.vscode-todo-plus"
+  ]
+}
